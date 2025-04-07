@@ -1,0 +1,11 @@
+# Dockerfile (dev setup)
+FROM eclipse-temurin:21-jdk-alpine
+
+WORKDIR /app
+
+COPY gradlew gradle/ build.gradle.kts settings.gradle.kts ./
+RUN chmod +x gradlew && ./gradlew clean build -x test || true
+
+EXPOSE 8080
+
+CMD ["./gradlew", "bootRun"]

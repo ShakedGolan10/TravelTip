@@ -1,0 +1,19 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    container_name: spring_dev
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./backend/src:/app/src
+      - ./backend/build.gradle:/app/build.gradle
+      - ./backend/settings.gradle:/app/settings.gradle
+      - ./backend/gradle:/app/gradle
+    env_file:
+      - ./backend/.env
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+    # command: ["./gradlew", "bootRun"]
